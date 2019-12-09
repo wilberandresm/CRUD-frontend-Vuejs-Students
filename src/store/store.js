@@ -49,6 +49,9 @@ export const store = new Vuex.Store({
     },
     [TypesStore.mutations.SET_STUDENTS]: (state, Students) => {
       state.Students = Students;
+    },
+    [TypesStore.mutations.SET_PSTUDENT]:(state,Pstudents)=>{
+      state.Pstudents=Pstudents;
     }
   },
   modules: {

@@ -32,7 +32,6 @@
       <pre class="m-0">{{ form }}</pre>
     </b-card>
 
-    <h1>{{PSTUDENTS}}</h1>
     <b-table striped hover :items="STUDENTS"></b-table>
   </div>
 </template>
