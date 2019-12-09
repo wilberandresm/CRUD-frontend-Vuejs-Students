@@ -25,14 +25,30 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" @click="POST_STUDENTS(form)" variant="primary">Submit</b-button>
-  
+       <b-button type="submit" @click="POST_STUDENTS(form)" variant="primary">Submit</b-button>
+
+      
     </b-form>
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
 
+    <b-table :items="STUDENTS" :fields="fields" striped responsive="sm">
+      <template v-slot:cell(show_details)="row">
+        <b-button size="sm" class="mr-2">
+          Borrar
+        </b-button>
+
+        <!-- As `row.showDetails` is one-way, we call the toggleDetails function on @change -->
+        
+      </template>
+
+    
+    </b-table>
+ 
+
     <b-table striped hover :items="STUDENTS"></b-table>
+
   </div>
 </template>
 
@@ -46,6 +62,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data(){
     return{
+      fields:['id','name','code','show_details'],
       form:{
         code:"",
         name:""
