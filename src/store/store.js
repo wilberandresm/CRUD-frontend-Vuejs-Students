@@ -13,7 +13,8 @@ export const store = new Vuex.Store({
     Language: "es",
     //cargando los estudiantes
     Students: [],
-    Pstudents:[]
+    Pstudents:[],
+    Dstudents:[]
   
   },
   getters: {
@@ -37,6 +38,12 @@ export const store = new Vuex.Store({
                 .catch(function(error){
                   commit(TypesStore.mutations.SET_PSTUDENT,error)
                 })
+    },
+    [TypesStore.actions.DEL_STUDENTS]:({commit},id)=>{
+      axios.delete('students/'+id)
+                  .then(response=>{
+                        commit(TypesStore.mutations.SET_DSTUDENTS,response.data)
+                  })
     }
 
   },
@@ -52,6 +59,9 @@ export const store = new Vuex.Store({
     },
     [TypesStore.mutations.SET_PSTUDENT]:(state,Pstudents)=>{
       state.Pstudents=Pstudents;
+    },
+    [TypesStore.mutations.SET_DSTUDENTS]:(state,Dstudents)=>{
+      state.Dstudents=Dstudents
     }
   },
   modules: {

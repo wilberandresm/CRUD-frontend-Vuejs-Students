@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-form >
-      <b-form-group @submit="POST_STUDENTS(form)"
+      <b-form-group 
         id="input-group-1"
         label="Code:"
         label-for="input-1"
@@ -33,9 +33,10 @@
       <pre class="m-0">{{ form }}</pre>
     </b-card>
 
-    <b-table :items="STUDENTS" :fields="fields" striped responsive="sm">
+    <b-form>
+    <b-table  :items="STUDENTS" :fields="fields" striped responsive="sm">
       <template v-slot:cell(show_details)="row">
-        <b-button size="sm" class="mr-2">
+        <b-button  type="submit" size="sm" @click="DELET_STUDENTS(row.item.id)" class="mr-2">
           Borrar
         </b-button>
 
@@ -45,9 +46,10 @@
 
     
     </b-table>
+    </b-form>
  
-
-    <b-table striped hover :items="STUDENTS"></b-table>
+   <!-- <h1>{{STUDENTS[0].id}}</h1>-->
+  <!--  <b-table striped hover :items="STUDENTS"></b-table> -->
 
   </div>
 </template>
@@ -73,7 +75,8 @@ export default {
   methods: {
     ...mapActions({
       GET_STUDENTS: TypesStore.actions.GET_STUDENTS,
-      POST_STUDENTS:TypesStore.actions.POST_STUDENTS
+      POST_STUDENTS:TypesStore.actions.POST_STUDENTS,
+      DELET_STUDENTS:TypesStore.actions.DEL_STUDENTS
     })
   },
   computed: {
