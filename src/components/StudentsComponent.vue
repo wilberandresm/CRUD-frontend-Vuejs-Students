@@ -33,7 +33,7 @@
       <pre class="m-0">{{ form }}</pre>
     </b-card>
 
-    <b-form>
+    <b-form >
     <b-table  :items="STUDENTS" :fields="fields" striped responsive="sm">
       <template v-slot:cell(show_details)="row">
         <b-button  type="submit" size="sm" @click="DELET_STUDENTS(row.item.id)" class="mr-2">
