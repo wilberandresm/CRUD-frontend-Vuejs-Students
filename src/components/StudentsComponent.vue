@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-form >
-      <b-form-group
+      <b-form-group @submit="POST_STUDENTS(form)"
         id="input-group-1"
         label="Code:"
         label-for="input-1"
@@ -25,12 +25,14 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="submit" @click="POST_STUDENTS(form)" variant="primary">Submit</b-button>
   
     </b-form>
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
+
+    <h1>{{PSTUDENTS}}</h1>
     <b-table striped hover :items="STUDENTS"></b-table>
   </div>
 </template>
@@ -46,24 +48,27 @@ export default {
   data(){
     return{
       form:{
-        code:'',
-        name:''
+        code:"",
+        name:""
 
       },
     }
   },
   methods: {
     ...mapActions({
-      GET_STUDENTS: TypesStore.actions.GET_STUDENTS
+      GET_STUDENTS: TypesStore.actions.GET_STUDENTS,
+      POST_STUDENTS:TypesStore.actions.POST_STUDENTS
     })
   },
   computed: {
     ...mapGetters({
-      STUDENTS: TypesStore.state.STUDENTS
+      STUDENTS: TypesStore.state.STUDENTS,
+      PSTUDENTS:TypesStore.state.PSTUDENTS
     })
   },
   mounted() {
     this.GET_STUDENTS();
+    this.POST_STUDENTS(this.form.code,this.form.name);
   }
 };
 </script>

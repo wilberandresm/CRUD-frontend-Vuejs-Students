@@ -12,12 +12,15 @@ export const store = new Vuex.Store({
     //variables
     Language: "es",
     //cargando los estudiantes
-    Students: []
+    Students: [],
+    Pstudents:[]
+  
   },
   getters: {
     //obtener el valor de las variables
     [TypesStore.state.LANGUAGE]: state => state.Language,
-    [TypesStore.state.STUDENTS]: state => state.Students
+    [TypesStore.state.STUDENTS]: state => state.Students,
+    [TypesStore.state.PSTUDENTS]:state=> state.Pstudents
   },
   actions: {
     //Se llama la api y parte operacional
@@ -25,7 +28,17 @@ export const store = new Vuex.Store({
       axios.get("students").then(response => {
         commit(TypesStore.mutations.SET_STUDENTS, response.data);
       });
+    },
+    [TypesStore.actions.POST_STUDENTS]:({commit},datajson)=>{
+      axios.post('students',datajson)
+                .then(function(response){
+                    commit(TypesStore.mutations.SET_PSTUDENT,response.data);
+                })
+                .catch(function(error){
+                  commit(TypesStore.mutations.SET_PSTUDENT,error)
+                })
     }
+
   },
   mutations: {
     //cambio de valor a las variables
