@@ -1,48 +1,60 @@
 <template>
   <div>
-    <b-form >
+    <form v-on:submit.prevent="onSubmit">
+    <b-form id="input" class="text-center">
       <b-form-group 
         id="input-group-1"
         label="Code:"
         label-for="input-1"
         description="We'll never share your code with anyone else."
       >
+        <b-col >
         <b-form-input
           id="input-1"
           v-model="form.code"
  
           required
           placeholder="Enter code"
+         
         ></b-form-input>
+        </b-col>
       </b-form-group>
 
       <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+        <b-col>
         <b-form-input
           id="input-2"
           v-model="form.name"
           required
           placeholder="Enter name"
         ></b-form-input>
+        </b-col>
       </b-form-group>
 
        <b-button type="submit" @click="POST_STUDENTS(form)" variant="primary">Submit</b-button>
 
       
     </b-form>
+
+    </form>
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
 
+     <form @submit.prevent>
     <b-form >
-    <b-table  :items="STUDENTS" :fields="fields" striped responsive="sm">
+    <b-table  :items="STUDENTS" :fields="fields" striped responsive="sm" fixed class="text-center">
       <template v-slot:cell(show_details)="row">
-        <b-button  type="submit" size="sm" @click="DELET_STUDENTS(row.item.id)" class="mr-2">
-          Borrar
-        </b-button>
-        <b-button size="sm" @click="row.toggleDetails" class="mr-2">
-          {{row.detailsShowing ? 'Cancelar la' : ''}} Actualizar
+       
+          <b-button  type="submit" size="sm" @click="DELET_STUDENTS(row.item.id)" class="mr-2" pill variant="outline-danger">
+            Borrar
+          </b-button>
+          <b-button size="sm" @click="row.toggleDetails" class="mr-2 m-2" variant="outline-primary">
+            {{row.detailsShowing ? 'No' : ''}} Actualizar
 
-        </b-button>
+          </b-button>
+
+       
 
         <!-- As `row.showDetails` is one-way, we call the toggleDetails function on @change -->
         
@@ -55,7 +67,7 @@
               label="Code:"
               label-for="input-1"
               description="We'll never share your code with anyone else."
-            >
+            > 
               <b-form-input
                 id="input-1"
                 v-model="form.code"
@@ -88,6 +100,8 @@
     
     </b-table>
     </b-form>
+
+     </form>
  
    <!-- <h1>{{STUDENTS[0].id}}</h1>-->
   <!--  <b-table striped hover :items="STUDENTS"></b-table> -->
@@ -135,4 +149,8 @@ export default {
 </script>
 
 <style scoped>
+
+  #input{
+    margin-top: 20px;
+  }
 </style>
