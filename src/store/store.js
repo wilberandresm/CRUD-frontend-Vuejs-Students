@@ -44,6 +44,16 @@ export const store = new Vuex.Store({
                   .then(response=>{
                         commit(TypesStore.mutations.SET_DSTUDENTS,response.data)
                   })
+    },
+    [TypesStore.actions.PUT_STUDENTS]:({commit},list)=>{
+      axios.put(`students/${list[0]}`,list[1])
+                  .then(function(response){
+                   
+                    commit(TypesStore.mutations.SET_PUTSTUDENTS,response.data)
+                  })
+                  .catch(function(error){
+                    commit(TypesStore.mutations.SET_PUTSTUDENTS,error)
+                  })
     }
 
   },

@@ -49,35 +49,36 @@
       </template>
         <!--Actualizar-->
       <template v-slot:row-details="row">
-        <b-form >
-      <b-form-group 
-        id="input-group-1"
-        label="Code:"
-        label-for="input-1"
-        description="We'll never share your code with anyone else."
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.code"
- 
-          required
-          placeholder="Enter code"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.name"
-          required
-          placeholder="Enter name"
-        ></b-form-input>
-      </b-form-group>
-
-       <b-button type="submit" @click="POST_STUDENTS(form)" variant="primary">Submit</b-button>
-
+          <b-form >
+            <b-form-group 
+              id="input-group-1"
+              label="Code:"
+              label-for="input-1"
+              description="We'll never share your code with anyone else."
+            >
+              <b-form-input
+                id="input-1"
+                v-model="form.code"
       
-    </b-form>
+                required
+                placeholder="Enter code"
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+              <b-form-input
+                id="input-2"
+                v-model="form.name"
+                required
+                placeholder="Enter name"
+              ></b-form-input>
+            </b-form-group>
+               <b-col>{{row.item.id}}</b-col>
+               <h1>{{form}}</h1>
+            <b-button type="submit" @click="PUT_STUDENTS([row.item.id,form])" variant="primary">Actualizar</b-button>
+
+        
+      </b-form>
 
 
 
@@ -116,7 +117,8 @@ export default {
     ...mapActions({
       GET_STUDENTS: TypesStore.actions.GET_STUDENTS,
       POST_STUDENTS:TypesStore.actions.POST_STUDENTS,
-      DELET_STUDENTS:TypesStore.actions.DEL_STUDENTS
+      DELET_STUDENTS:TypesStore.actions.DEL_STUDENTS,
+      PUT_STUDENTS:TypesStore.actions.PUT_STUDENTS
     })
   },
   computed: {
